@@ -10,7 +10,7 @@ export class WeatherServices {
 
         const res = await fetch(`/proxy/api/v1/current/${location}?lang=en`, {
             headers: {
-                Authorization: `Bearer ${AuthService.getToken()}`
+                Authorization: `Bearer ${AuthService.getTokenData()?.access_token}`
             }
         });
         const data = await res.json();
@@ -23,7 +23,7 @@ export class WeatherServices {
 
         const res = await fetch(`/proxy/api/v1/location/${location}?lang=en`, {
             headers: {
-                Authorization: `Bearer ${AuthService.getToken()}`
+                Authorization: `Bearer ${AuthService.getTokenData()?.access_token}`
             }
         });
         const data = await res.json();
@@ -35,7 +35,7 @@ export class WeatherServices {
 
         const res = await fetch(`/proxy/api/v1/location/search/${value}?lang=en`, {
             headers: {
-                Authorization: `Bearer ${AuthService.getToken()}`
+                Authorization: `Bearer ${AuthService.getTokenData()?.access_token}`
             }
         });
         const data: LocationsDTO = await res.json();

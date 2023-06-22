@@ -1,0 +1,16 @@
+.time-widget {
+    display: flex;
+    flex-direction: column;
+    
+    .time {
+        font-size: 50px;
+        font-weight: 800;
+        letter-spacing: 4px;
+        color: #fdb927;
+    }
+    .date-info {
+        font-weight: 600;
+        font-size: 18px;
+        word-spacing: 8px;
+    }
+}
