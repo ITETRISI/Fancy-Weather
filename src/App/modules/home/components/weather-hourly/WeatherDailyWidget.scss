@@ -1,0 +1,23 @@
+.weather-hourly-widget {
+    display: flex;
+    gap: 10px;
+    overflow: scroll;
+    padding: 10px 2px 2px;
+
+    .wether-hourly-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        .icon {
+            width: 50px;
+        }
+        cursor: pointer;
+        transition: .3s;
+        &.active, &:hover {
+            background-color: #fdc7520d;
+            color: #fdb926;
+        }
+    }
+    
+} 

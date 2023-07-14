@@ -6,14 +6,14 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 const theme = createTheme({
     palette: {
         secondary: {
-          main: '#29B2DD', // dark: #01579b
-          contrastText: "#fff"
+            main: '#29B2DD', // dark: #01579b
+            contrastText: "#fff"
         },
         primary: {
-          main: '#fdb927',
-          contrastText: "#fff"
+            main: '#fdb927',
+            contrastText: "#fff"
         },
-      },
+    },
 });
 
 
