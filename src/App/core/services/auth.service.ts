@@ -16,8 +16,10 @@ export class AuthService {
             });
             const data = await res.json();
 
-            this.setTokenData(data);
-            this.setUserData(authData)
+            const expiresDate = Math.round(Date.now() / 1000) + data.expires_in;
+            
+            this.setTokenData({ ...data, expires_in: expiresDate});
+            this.setUserData(authData);
 
             return data;
         } catch (e) {
@@ -46,7 +48,7 @@ export class AuthService {
     }
 
     static get isUserLoggedIn(): boolean {
-        return !!this.getTokenData()?.access_token;
+        return !!this.getTokenData()?.access_token && Math.round(Date.now() / 1000) < (this.getTokenData()?.expires_in || 0);
     }
 
 

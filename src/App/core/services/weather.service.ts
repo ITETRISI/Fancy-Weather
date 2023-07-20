@@ -1,4 +1,4 @@
-import { WeatherDailyInfo, WeatherDailyInfoDTO, WeatherInfo } from "App/shared/interfaces/weather.interface";
+import { WeatherDailyInfo, WeatherDailyInfoDTO, WeatherHourlyInfoDTO, WeatherInfo } from "App/shared/interfaces/weather.interface";
 import { AuthService } from "./auth.service";
 import { LocationInfo, LocationsDTO } from "App/shared/interfaces/location.interface";
 
@@ -45,13 +45,26 @@ export class WeatherServices {
     static getWeatherDaily = async (value: string): Promise<WeatherDailyInfo[]> => {
         if (!value) return [] as WeatherDailyInfo[];
 
-        const res = await fetch(`/proxy/api/v1/forecast/daily/${value}?dataset=full`, {
+        const res = await fetch(`/proxy/api/v1/forecast/daily/${value}?dataset=full&periods=7`, {
             headers: {
                 Authorization: `Bearer ${AuthService.getTokenData()?.access_token}`
             }
         });
 
         const data: WeatherDailyInfoDTO = await res.json();
+        return data.forecast;
+    };
+
+    static getWeatherHourly = async (value: string): Promise<WeatherInfo[]> => {
+        if (!value) return [] as WeatherInfo[];
+
+        const res = await fetch(`/proxy/api/v1/forecast/hourly/${value}?periods=192&history=1&dataset=full`, {
+            headers: {
+                Authorization: `Bearer ${AuthService.getTokenData()?.access_token}`
+            }
+        });
+
+        const data: WeatherHourlyInfoDTO = await res.json();
         return data.forecast;
     };
 }

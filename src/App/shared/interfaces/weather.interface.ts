@@ -2,6 +2,16 @@ export interface CurrentWeatherInfoDTO {
     current: WeatherInfo;
 }
 
+export interface ChartSeries {
+    x: string;
+    y: number;
+    icon: string;
+}
+
+export interface WeatherHourlyInfoDTO {
+    forecast: WeatherInfo[]
+}
+
 export interface WeatherDailyInfoDTO {
     forecast: WeatherDailyInfo[]
 }
