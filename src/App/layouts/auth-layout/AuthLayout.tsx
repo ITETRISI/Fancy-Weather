@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { Paper } from "@mui/material";
 
 export const AuthLayout = () => {
-    const imageUrl = `./assets/partly-cloudy-day.svg`;
+    const imageUrl = `./assets/weather-icons/partly-cloudy-day.svg`;
     return (
         <div className="auth-layout">
             <div className="left-content">

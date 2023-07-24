@@ -1,4 +1,4 @@
-import { Paper } from "@mui/material";
+import { Paper, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "./Home.scss"
 import { TimeWidget } from "./components/time-widget/TimeWidget";
@@ -9,12 +9,14 @@ import { WeatherWidget } from "./components/weather-widget/WeatherWidget";
 import { Search } from "./components/search/Search";
 import { Locations } from "./components/locations/Locations";
 import { WeatherDailyWidget } from "./components/weather-daily/WeatherDailyWidget";
-import { ApexLineChart } from "./components/chart/Chart";
+import { HourlyWeatherChart } from "./components/hourly-weathe-chart/HourlyWeatherChart";
+import { WidgetContainer } from "App/shared/components/widget-container/WidgetContainer";
 
 export const Home = () => {
 
     const [weather, setWeather] = useState<WeatherInfo>({} as WeatherInfo);
     const [weatherDaily, setWeatherDaily] = useState<WeatherDailyInfo[]>([] as WeatherDailyInfo[]);
+    const [currentDailyWeather, setCurrentDailyWeather] = useState<WeatherDailyInfo>({} as WeatherDailyInfo);
     const [location, setLocation] = useState<LocationInfo>({} as LocationInfo);
     const [locations, setLocations] = useState<LocationInfo[]>([] as LocationInfo[]);
     const [userLocation, setUserLocation] = useState<string>("");
@@ -36,6 +38,7 @@ export const Home = () => {
     };
 
     const selectWeatherDaily = (weatherInfo: WeatherDailyInfo, key: number): void => {
+        setCurrentDailyWeather(weatherInfo);
         setChartData(mapChartDataHourly(key))
     };
 
@@ -56,8 +59,12 @@ export const Home = () => {
     };
 
     const selectLocation = (value: LocationInfo): void => {
+        setLocations([]);
         WeatherServices.getWeatherData(value.id).then(setWeather);
-        WeatherServices.getWeatherDaily(value.id).then(setWeatherDaily);
+        WeatherServices.getWeatherDaily(value.id).then(data => {
+            setWeatherDaily(data);
+            setCurrentDailyWeather(data[0]);
+        });
         WeatherServices.getWeatherHourly(value.id).then(data => {
             let week: WeatherInfo[][] = [];
             let weatherForDay: WeatherInfo[] = [];
@@ -78,12 +85,28 @@ export const Home = () => {
                 }
             })
             setWeatherHourly(week);
-            setChartData(mapChartDataHourly(0, week)) 
+            setChartData(mapChartDataHourly(0, week))
             return week
         })
 
         setLocation(value);
     };
+
+    const checkWeatherConfidence = (confidence: string): string => {
+        let confidenceName = "";
+        switch (confidence) {
+            case "g":
+                confidenceName = "Good";
+                break;
+            case "y":
+                confidenceName = "Normal";
+                break;
+            case "o":
+                confidenceName = "low";
+                break;
+        }
+        return confidenceName
+    }
 
     return (
         <>
@@ -99,8 +122,36 @@ export const Home = () => {
                 <TimeWidget timezone={location?.timezone} />
                 <div className="widgets-container">
                     <WeatherDailyWidget weatherDaily={weatherDaily} select={selectWeatherDaily}></WeatherDailyWidget>
+                    <HourlyWeatherChart data={chartData} />
+                    {
+                        weatherDaily.length ?
+                            (
+                                <>
+                                    <WidgetContainer icon="thermostat" title="Minimum temperature" small={true}>
+                                        <span className="widget-info-text">{currentDailyWeather?.minTemp}°</span>
+                                    </WidgetContainer>
+                                    <WidgetContainer icon="thermostat" title="Maximum temperature" small={true}>
+                                        <span className="widget-info-text">{currentDailyWeather?.maxTemp}°</span>
+                                    </WidgetContainer>
+                                    <WidgetContainer icon="partly_cloudy_day-icon" title="Cloudiness" small={true}>
+                                        <span className="widget-info-text">{currentDailyWeather?.cloudiness} %</span>
+                                    </WidgetContainer>
+                                    <WidgetContainer icon="air" title="Wind speed" small={true}>
+                                        <span className="widget-info-text">{currentDailyWeather?.maxWindSpeed} m/s</span>
+                                    </WidgetContainer>
+                                    <WidgetContainer icon="weather_mix" title="Confidence in forecast" small={true}>
+                                        <span className="widget-info-text">{checkWeatherConfidence(currentDailyWeather?.confidence)}</span>
+                                    </WidgetContainer>
+                                </>
+
+                            ) :
+                            (
+                                <Skeleton variant="rectangular" width={200} height={120} />
+                            )
+                    }
                 </div>
-                <ApexLineChart data={chartData} />
+
+
             </Paper>
         </>
     );

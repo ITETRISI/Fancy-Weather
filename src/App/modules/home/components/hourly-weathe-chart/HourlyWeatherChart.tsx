@@ -2,13 +2,16 @@ import { ChartSeries } from "App/shared/interfaces/weather.interface";
 import { ApexOptions } from "apexcharts";
 import React from "react"
 import Chart from 'react-apexcharts'
-import "./Chart.scss"
+import "./HourlyWeatherChart.scss"
 import Skeleton from '@mui/material/Skeleton';
+import { Paper } from "@mui/material";
+import { WidgetContainer } from "App/shared/components/widget-container/WidgetContainer";
+import { WeatherIcons } from "App/shared/constants/icons";
 
 const options: ApexOptions = {
     chart: {
         type: "line",
-        height: 350,
+        width: "100%",
         zoom: {
             enabled: false
         },
@@ -58,10 +61,10 @@ const options: ApexOptions = {
             show: false,
         },
         custom: ({ series, seriesIndex, dataPointIndex, w }) => {
-            var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+            const data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
             return `
             <div class="tooltip_custom">
-                <img className="icon" src="./assets/partly-cloudy-day.svg" alt="icon" />
+                <img className="icon" src="${WeatherIcons[data.icon]}" alt="icon" />
                 <div class="temp">${data.y}°</div>
             </div>`;
 
@@ -88,7 +91,7 @@ const options: ApexOptions = {
     },
 };
 
-export const ApexLineChart = (props: { data: ChartSeries[] }) => {
+export const HourlyWeatherChart = (props: { data: ChartSeries[] }) => {
 
     const series = [
         {
@@ -98,9 +101,9 @@ export const ApexLineChart = (props: { data: ChartSeries[] }) => {
 
     return (
         props.data?.length ? (
-            <div>
-                <Chart options={options} series={series} width={700} height={320} />
-            </div >
+            <WidgetContainer icon="schedule" title="Hourly forecast">
+                <Chart options={options} series={series} height={320}/>
+            </WidgetContainer>
         ) : (
             <Skeleton variant="rectangular" width={700} height={320} />
         )
