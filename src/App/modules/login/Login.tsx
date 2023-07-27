@@ -3,8 +3,8 @@ import "./Login.scss";
 
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Alert, Snackbar, TextField } from "@mui/material";
-import { AuthService } from "App/core/services/auth.service";
-import { UserCredentials } from "App/shared/interfaces/auth.interface";
+import { AuthService } from "../../core/services/auth.service";
+import { UserCredentials } from "../../shared/interfaces/auth.interface";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 

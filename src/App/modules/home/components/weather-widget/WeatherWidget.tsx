@@ -1,9 +1,9 @@
 import React, { ReactElement } from "react";
 import "./WeatherWidget.scss"
-import { WeatherInfo } from "App/shared/interfaces/weather.interface";
-import { LocationInfo } from "App/shared/interfaces/location.interface";
+import { WeatherInfo } from "../../../../shared/interfaces/weather.interface";
+import { LocationInfo } from "../../../../shared/interfaces/location.interface";
 import { Skeleton } from "@mui/material";
-import { WeatherIcons } from "App/shared/constants/icons";
+import { WeatherIcons } from "../../../../shared/constants/icons";
 
 export const WeatherWidget = (props: { weather: WeatherInfo; location: LocationInfo }): ReactElement => {
     return (

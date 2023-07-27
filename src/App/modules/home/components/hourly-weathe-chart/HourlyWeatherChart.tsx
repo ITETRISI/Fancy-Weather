@@ -4,9 +4,8 @@ import React from "react"
 import Chart from 'react-apexcharts'
 import "./HourlyWeatherChart.scss"
 import Skeleton from '@mui/material/Skeleton';
-import { Paper } from "@mui/material";
-import { WidgetContainer } from "App/shared/components/widget-container/WidgetContainer";
-import { WeatherIcons } from "App/shared/constants/icons";
+import { WidgetContainer } from "../../../../shared/components/widget-container/WidgetContainer";
+import { WeatherIcons } from "../../../../shared/constants/icons";
 
 const options: ApexOptions = {
     chart: {
