@@ -1,9 +1,9 @@
-import { Paper, Skeleton } from "@mui/material";
-import { WeatherDailyInfo } from "App/shared/interfaces/weather.interface";
+import { Skeleton } from "@mui/material";
+import { WeatherDailyInfo } from "../../../../shared/interfaces/weather.interface";
 import React, { useState } from "react";
 import "./WeatherDailyWidget.scss";
-import { WidgetContainer } from "App/shared/components/widget-container/WidgetContainer";
-import { WeatherIcons } from "App/shared/constants/icons";
+import { WidgetContainer } from "../../../../shared/components/widget-container/WidgetContainer";
+import { WeatherIcons } from "../../../../shared/constants/icons";
 
 type SelectWeather = (arg: WeatherDailyInfo, key: number) => void;
 

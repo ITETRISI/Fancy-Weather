@@ -31,8 +31,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "serve": "webpack serve --mode development",
-    "build": "webpack --mode production",
+    "serve": "webpack serve --config webpack/webpack.config.js --env env=dev",
+    "build": "webpack --config webpack/webpack.config.js --env env=prod",
     "eject": "react-scripts eject",
     "gh-deploy": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages",
     "gh-deploy-init": "git push origin && git subtree push --prefix dist origin gh-pages"
@@ -65,6 +65,7 @@
     "babel-loader": "^9.1.2",
     "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
     "sass": "^1.63.4",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",

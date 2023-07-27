@@ -2,15 +2,15 @@ import { Paper, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "./Home.scss"
 import { TimeWidget } from "./components/time-widget/TimeWidget";
-import { ChartSeries, WeatherDailyInfo, WeatherInfo } from "App/shared/interfaces/weather.interface";
-import { LocationInfo } from "App/shared/interfaces/location.interface";
-import { WeatherServices } from "App/core/services/weather.service";
+import { ChartSeries, WeatherDailyInfo, WeatherInfo } from "../../shared/interfaces/weather.interface";
+import { LocationInfo } from "../../shared/interfaces/location.interface";
+import { WeatherServices } from "../../core/services/weather.service";
 import { WeatherWidget } from "./components/weather-widget/WeatherWidget";
 import { Search } from "./components/search/Search";
 import { Locations } from "./components/locations/Locations";
 import { WeatherDailyWidget } from "./components/weather-daily/WeatherDailyWidget";
 import { HourlyWeatherChart } from "./components/hourly-weathe-chart/HourlyWeatherChart";
-import { WidgetContainer } from "App/shared/components/widget-container/WidgetContainer";
+import { WidgetContainer } from "../../shared/components/widget-container/WidgetContainer";
 
 export const Home = () => {
 
