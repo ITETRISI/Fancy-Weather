@@ -1,11 +1,18 @@
-const webpack = require('webpack')
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  mode: 'production',
-  devtool: 'source-map',
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.name': JSON.stringify('Codevolution'),
-    }),
-  ],
+    mode: 'production',
+    output: {
+        filename: '[name].[hash].js',
+        publicPath: '/'
+    },
+    // optimization: {
+    //     minimizer: [
+    //         // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+    //         // `...`,
+    //         new CssMinimizerPlugin(),
+    //     ],
+    // },
+    // plugins: [new MiniCssExtractPlugin()],
 }

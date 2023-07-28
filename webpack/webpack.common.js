@@ -1,30 +1,15 @@
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const postcssPresetEnv = require('postcss-preset-env');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: path.resolve(__dirname, '..', './src/index.tsx'),
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "src/index.html", // to import index.html file inside index.js
-        }),
-        new MiniCssExtractPlugin(),
-    ],
-    devServer: {
-        port: 3030, // you can change the port
-        hot: true,
-        historyApiFallback: true,
-        proxy: {
-            "/proxy": {
-                target: "https://pfa.foreca.com/",
-
-                changeOrigin: true
-            }
-        }
+    entry: './src/index.tsx',
+    output: {
+        path: path.resolve(__dirname, '..', './dist'),
+        filename: '[name].bundle.js',
+        publicPath: '/',
+        clean: true,
     },
     module: {
         rules: [{
@@ -35,7 +20,7 @@ module.exports = {
                 }, ],
             },
             {
-                test: /\.tsx?$/,
+                test: /\.(tsx|ts)?$/,
                 loader: 'ts-loader'
             },
             {
@@ -60,13 +45,23 @@ module.exports = {
             },
         ],
     },
-    output: {
-        path: path.resolve(__dirname, '..', './dist'),
-        filename: 'bundle.js',
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '..', './src/index.html'),
+            template: './src/index.html'
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'assets/styles/[name].css',
+            chunkFilename: '[id].css'
+        }),
+        new CopyPlugin({
+            patterns: [{
+                from: './public/assets',
+                to: 'assets/images',
+                toType: 'dir'
+            }, ]
         }),
     ],
     stats: 'errors-only',
