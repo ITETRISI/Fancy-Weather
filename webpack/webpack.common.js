@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     entry: './src/index.tsx',
     output: {
-        path: path.resolve(__dirname, '..', './dist'),
+        path: path.resolve(__dirname, "..", 'dist'),
         filename: '[name].bundle.js',
         publicPath: '/',
         clean: true,
@@ -53,16 +53,17 @@ module.exports = {
             template: './src/index.html'
         }),
         new MiniCssExtractPlugin({
-            filename: 'assets/styles/[name].css',
+            filename: 'styles/[name].css',
             chunkFilename: '[id].css'
         }),
         new CopyPlugin({
             patterns: [{
                 from: './public/assets',
-                to: 'assets/images',
+                to: 'assets',
                 toType: 'dir'
             }, ]
         }),
     ],
     stats: 'errors-only',
+
 }

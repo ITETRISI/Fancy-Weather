@@ -1,4 +1,5 @@
 import { UserCredentials } from "App/shared/interfaces/auth.interface";
+import { webApiUrl } from "../constants/url.constant";
 
 interface AuthToken {
     access_token: string;
@@ -10,7 +11,7 @@ export class AuthService {
 
     static auth = async (authData: UserCredentials): Promise<AuthToken | string> => {
         try {
-            const res = await fetch("/proxy/authorize/token", {
+            const res = await fetch(`${webApiUrl}/authorize/token`, {
                 method: "POST",
                 body: JSON.stringify(authData)
             });

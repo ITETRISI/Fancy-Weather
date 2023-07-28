@@ -1,6 +1,6 @@
 module.exports = {
     mode: 'development',
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     devServer: {
         port: 3030, // you can change the port
         hot: true,

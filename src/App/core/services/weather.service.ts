@@ -1,6 +1,7 @@
 import { WeatherDailyInfo, WeatherDailyInfoDTO, WeatherHourlyInfoDTO, WeatherInfo } from "App/shared/interfaces/weather.interface";
 import { AuthService } from "./auth.service";
 import { LocationInfo, LocationsDTO } from "App/shared/interfaces/location.interface";
+import { webApiUrl } from "../constants/url.constant";
 
 export class WeatherServices {
     static currentUserLocation: string;
@@ -8,7 +9,7 @@ export class WeatherServices {
     static getWeatherData = async (location: string): Promise<WeatherInfo> => {
         if (!location) return {} as WeatherInfo;
 
-        const res = await fetch(`/proxy/api/v1/current/${location}?lang=en`, {
+        const res = await fetch(`${webApiUrl}/api/v1/current/${location}?lang=en`, {
             headers: {
                 Authorization: `Bearer ${AuthService.getTokenData()?.access_token}`
             }
@@ -21,7 +22,7 @@ export class WeatherServices {
     static getUserLocationInfo = async (location: string): Promise<LocationInfo> => {
         if (!location) return {} as LocationInfo;
 
-        const res = await fetch(`/proxy/api/v1/location/${location}?lang=en`, {
+        const res = await fetch(`${webApiUrl}/api/v1/location/${location}?lang=en`, {
             headers: {
                 Authorization: `Bearer ${AuthService.getTokenData()?.access_token}`
             }
@@ -33,7 +34,7 @@ export class WeatherServices {
     static getLocations = async (value: string): Promise<LocationInfo[]> => {
         if (!value) return [] as LocationInfo[];
 
-        const res = await fetch(`/proxy/api/v1/location/search/${value}?lang=en`, {
+        const res = await fetch(`${webApiUrl}/api/v1/location/search/${value}?lang=en`, {
             headers: {
                 Authorization: `Bearer ${AuthService.getTokenData()?.access_token}`
             }
@@ -45,7 +46,7 @@ export class WeatherServices {
     static getWeatherDaily = async (value: string): Promise<WeatherDailyInfo[]> => {
         if (!value) return [] as WeatherDailyInfo[];
 
-        const res = await fetch(`/proxy/api/v1/forecast/daily/${value}?dataset=full&periods=7`, {
+        const res = await fetch(`${webApiUrl}/api/v1/forecast/daily/${value}?dataset=full&periods=7`, {
             headers: {
                 Authorization: `Bearer ${AuthService.getTokenData()?.access_token}`
             }
@@ -58,7 +59,7 @@ export class WeatherServices {
     static getWeatherHourly = async (value: string): Promise<WeatherInfo[]> => {
         if (!value) return [] as WeatherInfo[];
 
-        const res = await fetch(`/proxy/api/v1/forecast/hourly/${value}?periods=192&history=1&dataset=full`, {
+        const res = await fetch(`${webApiUrl}/api/v1/forecast/hourly/${value}?periods=192&history=1&dataset=full`, {
             headers: {
                 Authorization: `Bearer ${AuthService.getTokenData()?.access_token}`
             }
