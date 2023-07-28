@@ -1,1 +1,0 @@
-export const webApiUrl = process.env.NODE_ENV === "development" ? "/proxy" : "https://pfa.foreca.com";

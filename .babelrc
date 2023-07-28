@@ -1,8 +1,0 @@
-{
-    "presets": [["@babel/preset-react", { "runtime": "automatic" }], "@babel/preset-env"],
-    "plugins": [
-      "@babel/plugin-proposal-object-rest-spread",
-      "@babel/plugin-proposal-optional-chaining",
-      "@babel/plugin-transform-runtime"
-    ]
-  }
