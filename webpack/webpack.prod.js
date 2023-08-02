@@ -20,7 +20,7 @@ module.exports = {
     plugins: [
         new CopyPlugin({
             patterns: [{
-                from: 'netlify.toml',
+                from: '_redirects',
             }, ]
         }),
         new MiniCssExtractPlugin()
