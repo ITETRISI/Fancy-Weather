@@ -1,4 +1,4 @@
-const webpack = require('webpack')
+const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -18,6 +18,11 @@ module.exports = {
         ],
     },
     plugins: [
+        new CopyPlugin({
+            patterns: [{
+                from: 'netlify.toml',
+            }, ]
+        }),
         new MiniCssExtractPlugin()
     ],
 }
