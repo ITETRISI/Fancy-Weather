@@ -16,6 +16,7 @@
         box-sizing: border-box;
         flex: 2;
         overflow: hidden;
+        overflow-y: auto;
         border-radius: 40px 0 0 40px;
         .widgets-container {
             margin-top: 20px;
@@ -34,5 +35,23 @@
         width: 100%;
         position: absolute;
         top: 40px;
+    }
+
+    @media screen and (max-width: 1200px) {
+        .left-content {
+            position: sticky;
+            top: 0;
+        }
+        .right-content {
+            z-index: 10;
+            border-radius: 40px 40px 0 0 ;
+            @media screen and (max-width: 740px) {
+                padding: 20px 40px;
+            }
+        }
+        .search-container {
+            top: 20px;
+
+        }
     }
 }

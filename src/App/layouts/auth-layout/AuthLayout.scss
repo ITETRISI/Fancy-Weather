@@ -3,6 +3,7 @@
     width: 100vw;
     display: flex;
     background-color: #29B2DD;
+
     .left-content {
         display: flex;
         flex-direction: column;
@@ -11,6 +12,7 @@
         height: 100%;
         flex: 1;
         margin-top: -40px;
+
         .title {
             font-size: 58px;
             color: #fff;
@@ -18,6 +20,10 @@
             margin-top: -60px;
             .light {
                 color: #fdb927;
+            }
+
+            @media screen and (max-width: 750px) {
+                font-size: 38px;
             }
         }
     }
@@ -33,5 +39,24 @@
 
     .icon {
         width: 300px;
+        @media screen and (max-width: 750px) {
+            width: 120px;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        width: inherit;
+        flex-direction: column;
+        .left-content {
+            flex-direction: row;
+            margin: -40px 0;
+            .title {
+                margin: 0;
+            }
+        }
+        .right-content {
+            flex: 3;
+            border-radius: 40px 40px 0 0;
+        }
     }
 }

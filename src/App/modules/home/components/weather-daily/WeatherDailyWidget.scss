@@ -22,4 +22,7 @@
             color: #fdb926;
         }
     }
+    @media screen and (max-width: 740px) {
+        flex-wrap: wrap;
+    }
 }
